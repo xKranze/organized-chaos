@@ -21,10 +21,10 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 
-  // Get current day
+  // Get current day.
   var day = dayjs();
 
-  // Set last two letters depending on the current day
+  // Set last two letters depending on the current day.
   var appendDay = 'th'
   if(day.format('D') == '1' || day.format('D') == '21' || day.format('D') == '31'){
     appendDay = 'st'
@@ -37,11 +37,11 @@ $(function () {
   // Update the current day on the page
   $('#currentDay').text(day.format('dddd') + ", " + day.format('MMMM D') + appendDay);
 
-  // Get current hour
+  // Get current hour 24 hour format.
   var currentHour = day.format('H');
 
   for(var i = 9; i <= 17; i++){ 
-    // Set current hour css on the page
+    // Set current hour css on the page and color them corrrectly according to time.
     if(currentHour > i){
       $('#hour-' + i).addClass('past');
     }else if(currentHour == i){
@@ -50,7 +50,7 @@ $(function () {
       $('#hour-' + i).addClass('future');
     }
     
-    // Set all textareas with their locally stored data
+    // Set all text areas with their locally stored data to present on planner.
     $("#ta-"+i).val(localStorage.getItem(i));
   }
 
@@ -58,6 +58,7 @@ $(function () {
   $('.saveBtn').click(function (e) { 
     e.preventDefault();
     var id = e.target.id.split('-')[1];
+    //grabs the id from event and splits it apart from "-" and using array [1] to set local storage key while also storing data grabbed from textarea to store as value.
     localStorage.setItem(id, $('#ta-' + id).val());
   });
 });
