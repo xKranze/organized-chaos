@@ -54,8 +54,9 @@ $(function () {
     $("#ta-"+i).val(localStorage.getItem(i));
   }
 
-  // Add event listener to all buttons
+  // Add event listener to all buttons.
   $('.saveBtn').click(function (e) { 
+    //used preventDefault to prevent firing off all buttons when this is pushed.
     e.preventDefault();
     var id = e.target.id.split('-')[1];
     //grabs the id from event and splits it apart from "-" and using array [1] to set local storage key while also storing data grabbed from textarea to store as value.
