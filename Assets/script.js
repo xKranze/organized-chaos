@@ -20,4 +20,44 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
+
+  // Get current day
+  var day = dayjs();
+
+  // Set last two letters depending on the current day
+  var appendDay = 'th'
+  if(day.format('D') == '1' || day.format('D') == '21' || day.format('D') == '31'){
+    appendDay = 'st'
+  }else if(day.format('D') == '2' || day.format('D') == '22'){
+    appendDay = 'nd'
+  }else if(day.format('D') == '3' || day.format('D') == '23'){
+    appendDay = 'rd'
+  }
+
+  // Update the current day on the page
+  $('#currentDay').text(day.format('dddd') + ", " + day.format('MMMM D') + appendDay);
+
+  // Get current hour
+  var currentHour = day.format('H');
+
+  for(var i = 9; i <= 17; i++){ 
+    // Set current hour css on the page
+    if(currentHour > i){
+      $('#hour-' + i).addClass('past');
+    }else if(currentHour == i){
+      $('#hour-' + i).addClass('present');
+    }else{
+      $('#hour-' + i).addClass('future');
+    }
+    
+    // Set all textareas with their locally stored data
+    $("#ta-"+i).val(localStorage.getItem(i));
+  }
+
+  // Add event listener to all buttons
+  $('.saveBtn').click(function (e) { 
+    e.preventDefault();
+    var id = e.target.id.split('-')[1];
+    localStorage.setItem(id, $('#ta-' + id).val());
+  });
 });
