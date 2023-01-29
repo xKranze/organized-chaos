@@ -14,7 +14,9 @@ N/A
 
 ## Credits
 Starter code from: https://github.com/coding-boot-camp/crispy-octo-meme
+
 https://stackoverflow.com/ 
+
 addtional tutoring
 ## License
 N/A
